@@ -1,0 +1,77 @@
+{
+  "name": "react-query-wildcard",
+  "version": "3.39.3",
+  "description": "",
+  "author": "Z1 Fu",
+  "homepage": "https://github.com/z1fu/react-query-wildcard#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/z1fu/react-query-wildcard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/z1fu/react-query-wildcard/issues"
+  },
+  "keywords": [
+    "react-query",
+    "react-query-wildcard"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "lint": "eslint .",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && npm publish",
+    "start": "tsx src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepare": "simple-git-hooks"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "matcher": "^5.0.0",
+    "react-query": "3.39.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.2",
+    "@antfu/ni": "^0.21.12",
+    "bumpp": "^9.2.1",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "lint-staged": "^15.2.0",
+    "simple-git-hooks": "^2.9.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0",
+    "vite": "^5.0.11",
+    "vitest": "^1.1.3"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}
