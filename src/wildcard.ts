@@ -1,24 +1,28 @@
-import { isMatch } from 'matcher'
-
 export class Wildcard {
-  constructor(private patterns: string) {}
+  private val: any
+
+  constructor() {}
 
   toJSON() {
-    return this.patterns
+    return this.val || '*'
   }
 
-  isMatch(val: string) {
-    return isMatch(val, this.patterns)
+  exec<R>(val: any, fn: () => R): R {
+    const _ = this.val
+    this.val = val
+    const ret = fn()
+    this.val = _
+    return ret
+  }
+
+  static is(val: any): val is Wildcard {
+    return val instanceof Wildcard
   }
 }
 
-export function wildcard<T>(v: T, {
-  patterns = '*',
-}: {
-  patterns?: string
-}): T | Wildcard {
-  if (v !== patterns)
+export function wildcard<T>(v: T): T | Wildcard {
+  if (v !== '*')
     return v
 
-  return new Wildcard(patterns)
+  return new Wildcard()
 }
