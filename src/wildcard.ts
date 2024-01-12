@@ -1,18 +1,6 @@
 export class Wildcard {
-  private val: any
-
-  constructor() {}
-
   toJSON() {
-    return this.val || '*'
-  }
-
-  exec<R>(val: any, fn: () => R): R {
-    const _ = this.val
-    this.val = val
-    const ret = fn()
-    this.val = _
-    return ret
+    return '*'
   }
 
   static is(val: any): val is Wildcard {

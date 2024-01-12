@@ -3,8 +3,7 @@ import { QueryCache } from 'react-query'
 import type { Query, QueryKey } from 'react-query'
 import { type QueryFilters, parseFilterArgs } from 'react-query/types/core/utils'
 
-import { isWildcardQueryKey } from './queryKey'
-import { Wildcard } from './wildcard'
+import { hashWildcardQueryKey, isWildcardQueryKey, matchQuery } from './queryKey'
 
 export class WildcardQueryCache extends QueryCache {
   findAll(queryKey?: QueryKey, filters?: QueryFilters): Query[]
@@ -14,10 +13,9 @@ export class WildcardQueryCache extends QueryCache {
     const [filters] = parseFilterArgs(arg1, arg2)
 
     if (isWildcardQueryKey(filters.queryKey)) {
-      const wildcardQueryKey = [...filters.queryKey]
+      const wildcardQueryKey = hashWildcardQueryKey(filters.queryKey)
       delete filters.queryKey
-      filters.predicate = query => Array.isArray(query.queryKey)
-      && query.queryKey.every((item, index) => Wildcard.is(wildcardQueryKey[index]) && item === wildcardQueryKey[index])
+      filters.predicate = query => matchQuery(wildcardQueryKey, query)
     }
 
     return super.findAll(filters)
