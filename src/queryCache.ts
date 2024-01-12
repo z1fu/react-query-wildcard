@@ -1,7 +1,10 @@
 import { QueryCache } from 'react-query'
 
 import type { Query, QueryKey } from 'react-query'
-import { type QueryFilters, parseFilterArgs } from 'react-query/types/core/utils'
+
+// @ts-expect-error todo
+import { parseFilterArgs } from 'react-query/lib/core/utils'
+import type { QueryFilters } from 'react-query/types/core/utils'
 
 import { hashWildcardQueryKey, isWildcardQueryKey, matchQuery } from './queryKey'
 
@@ -15,7 +18,7 @@ export class WildcardQueryCache extends QueryCache {
     if (isWildcardQueryKey(filters.queryKey)) {
       const wildcardQueryKey = hashWildcardQueryKey(filters.queryKey)
       delete filters.queryKey
-      filters.predicate = query => matchQuery(wildcardQueryKey, query)
+      filters.predicate = (query: Query<unknown, unknown, unknown, QueryKey>) => matchQuery(wildcardQueryKey, query)
     }
 
     return super.findAll(filters)
