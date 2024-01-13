@@ -1,9 +1,8 @@
 import { QueryCache } from 'react-query'
-
 import type { Query, QueryKey } from 'react-query'
 
-// @ts-expect-error todo
-import { parseFilterArgs } from 'react-query/lib/core/utils'
+// @ts-expect-error internal fn
+import { parseFilterArgs } from 'react-query/es/core/utils'
 import type { QueryFilters } from 'react-query/types/core/utils'
 
 import { hashWildcardQueryKey, isWildcardQueryKey, matchQuery } from './queryKey'

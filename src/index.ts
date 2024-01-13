@@ -1,3 +1,4 @@
-export * from './queryCache'
-export * from './queryKey'
-export * from './wildcard'
+import { WildcardQueryCache } from './queryCache'
+import { wildcard } from './wildcard'
+
+export { WildcardQueryCache, wildcard }
