@@ -1,6 +1,7 @@
 {
   "name": "react-query-wildcard",
   "version": "3.39.3",
+  "packageManager": "pnpm@8.14.0",
   "description": "",
   "author": "Z1 Fu",
   "homepage": "https://github.com/z1fu/react-query-wildcard#readme",
