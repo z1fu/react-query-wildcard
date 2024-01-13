@@ -1,44 +1,16 @@
 import { expect, it } from 'vitest'
 import type { QueryFunction } from 'react-query'
-import { QueriesObserver, QueryClient } from 'react-query'
+import { QueriesObserver } from 'react-query'
 
-import { WildcardQueryCache, wildcard } from '../src'
+import { env } from './util'
 
 ///////////////////////
 // prepare test data //
 ///////////////////////
 
-const queryCache = new WildcardQueryCache()
-const queryClient = new QueryClient({ queryCache })
-
-const categories = ['tech', 'life', 'game'] as const
-type Category = (typeof categories)[number]
+const { queryClient, postKey, init } = env()
 
 const now = Date.now()
-const postKey = (category: Category | '*', id?: number | '*') => ['post', wildcard(category), ...(typeof id === 'number' ? [wildcard(id)] : [])]
-
-async function init(time = Date.now()) {
-  const promises = []
-
-  // post categories
-  for (const category of categories) {
-  // post id
-    for (let index = 0; index < 10; index++) {
-      promises.push(queryClient.fetchQuery({
-        queryKey: postKey(category, index),
-        queryFn: () => {
-          return Promise.resolve({
-            id: index,
-            category,
-            time,
-          })
-        },
-      }))
-    }
-  }
-
-  await Promise.allSettled(promises)
-}
 
 await init(now)
 

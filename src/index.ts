@@ -1,4 +1,5 @@
 import { WildcardQueryCache } from './queryCache'
 import { wildcard } from './wildcard'
+import { WildcardQueriesObserver } from './queriesObserver'
 
-export { WildcardQueryCache, wildcard }
+export { wildcard, WildcardQueryCache, WildcardQueriesObserver }
