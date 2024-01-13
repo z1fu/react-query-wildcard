@@ -8,7 +8,7 @@ export function isWildcardQueryKey(queryKey: QueryKey | undefined): queryKey is 
 }
 
 export function hashWildcardQueryKey(queryKey: readonly unknown[], wildcardTag = WILDCARD): string {
-  return hashQueryKey([...queryKey]).replaceAll(new RegExp(`,"\\${wildcardTag}"(,|])`, 'g'), `,${wildcardTag}$1`)
+  return hashQueryKey([...queryKey]).replaceAll(new RegExp(`,"\\${wildcardTag}"`, 'g'), `,${wildcardTag}`)
 }
 
 export function matchQuery(wildcardQueryKey: string, query: Query<unknown, unknown, unknown, QueryKey>): boolean {
